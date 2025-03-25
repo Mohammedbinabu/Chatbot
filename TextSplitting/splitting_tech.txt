@@ -1,0 +1,70 @@
+Types of Textsplitting techniques:
+
+*CharacterTextSplitter*
+
+-Splits text based on characters (like newline \n or space).
+-Useful for structured data (e.g., paragraphs, CSV, markdown).
+----------------------------------------
+code:
+from langchain.text_splitter import CharacterTextSplitter
+
+text_splitter = CharacterTextSplitter(separator="\n\n", chunk_size=500, chunk_overlap=50)
+chunks = text_splitter.split_text(shakespeare_biography)
+----------------------------------------
+
+*RecursiveCharacterTextSplitter (Most Common)*
+
+-Starts with large chunks and recursively breaks down text into smaller ones.
+-Best for unstructured long texts like books or biographies.
+-Ensures meaningful splits (e.g., breaking at sentence boundaries rather than mid-word).
+
+----------------------------------------
+code:
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+chunks = text_splitter.split_text(shakespeare_biography)
+
+----------------------------------------
+
+*TokenTextSplitter*
+
+-Splits text based on LLM token limits (e.g., OpenAI models).
+-Good when you need to fit within model constrai
+
+----------------------------------------
+code:
+from langchain.text_splitter import TokenTextSplitter
+
+text_splitter = TokenTextSplitter(chunk_size=200, chunk_overlap=20)
+chunks = text_splitter.split_text(shakespeare_biography)
+
+----------------------------------------
+
+*NLTKTextSplitter*
+
+-Uses NLTK sentence tokenizer to split by sentences.
+-Ideal for well-structured text like essays, papers, or biographie
+
+----------------------------------------
+code:
+from langchain.text_splitter import NLTKTextSplitter
+
+text_splitter = NLTKTextSplitter()
+chunks = text_splitter.split_text(shakespeare_biography)
+
+----------------------------------------
+
+*MarkdownTextSplitter*
+
+-Preserves Markdown formatting (headings, lists, code blocks).
+-Great for technical documentation, blogs, or research papers.
+
+----------------------------------------
+code:
+from langchain.text_splitter import MarkdownTextSplitter
+
+text_splitter = MarkdownTextSplitter()
+chunks = text_splitter.split_text(shakespeare_biography)
+
+-----------------------------------------
