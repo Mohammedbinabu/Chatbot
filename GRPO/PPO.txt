@@ -1,0 +1,25 @@
+* fine-tuning works well for small dataset.
+* fine-tuning is using already trained model like Llama, GPT and training on label data to give answer
+  by just adjusting weights.
+
+* reinforcement learning explore new things.
+* Using algo like PPO,GRPO,DPO...etc to make a model which learns from the given label data.
+* Here we need prompt,response and rewards.
+
+PPO - * Directly optimizes the agent for maximize rewards.
+      * Don't use PPO on just prompt and response. if u got such data as prompt and response pair,
+        then you have to use (SFT)
+ ____________________                       ______________________________________
+|                    | Respose generated   |                                      |
+| Model1(fine-tuned) |-------------------->| Model2(Reward Model)                 |
+|____________________|<--------            | [assigns a Reward score to response] |
+          ^                    |           |______________________________________|
+          |                    |                             |
+          |                    |                             |
+                               |Update                       |
+  {   input prompt  }          |                             |
+                               |             ________________v________________________
+                               |___________|                                          |
+                                           |  GROP or PPO (updates the  model policy  |
+                                           |  / update weights for Model1)            |
+                                           |__________________________________________|
